@@ -57,13 +57,23 @@ class PermisosComponent extends Component {
 		if($currentPermisos == 'public'){  // Si el acceso el publico, el usuario tiene acceso
 			return true;
 		}elseif(is_array($currentPermisos)){
-			foreach ($currentPermisos as $permiso) {  // Si el acceso el publico, el usuario tiene acceso
+			foreach ($currentPermisos as $permiso){  // Si el acceso el publico, el usuario tiene acceso
 				if($permiso == 'public'){
 					return true;
 				}
 				if(isset($userPerfil[$permiso]) && $userPerfil[$permiso]){ // Si el usuario tiene permiso , el usuario tiene acceso
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	public function hasPermission($perfils = array()){
+		$userPerfil = $this->recreatePerfil( $this->Auth->user('Perfil') );
+		foreach ($perfils as $perfil) {
+			if(@$userPerfil[$perfil]){
+				return true;
 			}
 		}
 		return false;

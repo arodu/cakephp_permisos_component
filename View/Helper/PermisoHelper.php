@@ -5,7 +5,6 @@ class PermisoHelper extends AppHelper {
   private $Component = null;
 	private $permisosBuffer = null;
 
-
 	public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
     $this->Component = $settings['component'];
@@ -18,6 +17,11 @@ class PermisoHelper extends AppHelper {
       return '';
     }
   }
+
+	public function hasPermission($perfil = array() ){
+		return $this->Component->hasPermission($perfil);
+	}
+
 
 	//public function codeStart($permiso = array(), $options = array()){
 	//	$this->permisosBuffer[] = array('permiso'=>$permiso, 'options'=>$options);

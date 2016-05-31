@@ -1,0 +1,27 @@
+<?php
+	$config = array(
+		'Permisos'=>array(
+
+			'pages'=>array(
+				'index' => 'public',
+			),
+
+			'usuarios'=>array(
+				'index'  => 'public',
+				'view'   => 'public',
+				'add'    => 'public',
+				'edit'   => array('public'),
+				'delete' => array('admin'),
+			),
+
+			'docentes'=>array(
+				'index' => array('user'),
+				'view'  => array('public'),
+				'add'   => array('admin','user'),
+				'edit'  => array('public'),
+			)
+
+		)
+	);
+
+

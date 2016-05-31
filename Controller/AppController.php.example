@@ -1,0 +1,35 @@
+<?php
+
+App::uses('Controller', 'Controller');
+
+class AppController extends Controller {
+
+  public $components = array(
+    'Flash',
+    'Session',
+    'Permisos'=>array(
+      'userRoot'=>true,
+      'defaultPublic'=>true,
+    ),
+    'Auth' => array(
+      'loginRedirect' => array('controller' => 'usuarios', 'action' => 'index' ),
+      'logoutRedirect' => array( 'controller' => 'usuarios', 'action' => 'login'),
+      'loginAction' => array('controller' => 'usuarios', 'action' => 'login'),
+      'authorize' => array('Controller'),
+      'authenticate' => array(
+        'Form' => array(
+          'userModel'=>'Usuario',
+          'contain'=>array(
+              'Perfil'=>array('fields'=>array('id','code')),
+            ),
+          'passwordHasher' => 'Blowfish',
+        )
+      )
+    )
+  );
+
+  public function isAuthorized() {
+    return $this->Permisos->isAuthorized();
+  }
+
+}
